@@ -78,6 +78,11 @@ export default {
           title: "订单管理"
         },
         {
+          icon: "el-icon-lx-favorfill",
+          index: "recommender",
+          title: "推荐管理"
+        },
+        {
           icon: "el-icon-lx-emoji",
           index: "icon",
           title: "自定义图标"

@@ -13,7 +13,11 @@
         header-cell-class-name="table-header">
         <el-table-column prop="orderId" label="订单号"></el-table-column>
         <el-table-column prop="username" label="用户名"></el-table-column>
-        <el-table-column prop="orderTotal" label="支付金额"></el-table-column>
+        <el-table-column prop="orderTotal" label="支付金额">
+          <template v-slot="scope">
+            <el-tag>{{scope.row.orderTotal}}</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="orderStatus" label="支付状态">
           <template v-slot="scope">
             <el-tag :type="getTypeStatus(scope.row.orderStatus)">{{getOrderStatus(scope.row.orderStatus)}}</el-tag>

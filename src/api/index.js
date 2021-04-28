@@ -86,5 +86,29 @@ export const deleteUser = query => {
     });
 };
 
+export const getRecommenderList = query => {
+    return request({
+        url: '/api/admin/recommender/getRecommenderList',
+        method: 'get',
+        params: query
+    });
+};
+
+export const deleteRecommender = query => {
+    return request({
+        url: '/api/admin/recommender/deleteRecommender',
+        method: 'delete',
+        params: query
+    });
+};
+export const addOrUpdateSlide = query => {
+    return request({
+        url: '/api/admin/recommender/addOrUpdateSlide',
+        method: 'post',
+        params: query
+    });
+};
+
+
 
 

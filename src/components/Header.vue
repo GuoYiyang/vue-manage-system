@@ -20,7 +20,7 @@
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
+                            <a href="https://github.com/guoyiyang" target="_blank">
                                 <el-dropdown-item>项目仓库</el-dropdown-item>
                             </a>
                             <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item>
@@ -36,8 +36,7 @@ export default {
     data() {
         return {
             fullscreen: false,
-            name: "linxin",
-            message: 2
+            name: "kayn"
         };
     },
     computed: {
@@ -52,7 +51,7 @@ export default {
     methods: {
         // 用户名下拉菜单选择事件
         handleCommand(command) {
-            if (command == "loginout") {
+            if (command === "loginout") {
                 localStorage.removeItem("ms_username");
                 this.$router.push("/login");
             }

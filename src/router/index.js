@@ -47,6 +47,15 @@ const routes = [
                     /* webpackChunkName: "table" */
                     "../views/OrderTable.vue")
             },{
+                path: "/recommender",
+                name: "recommendertable",
+                meta: {
+                    title: '推荐管理'
+                },
+                component: () => import (
+                    /* webpackChunkName: "table" */
+                    "../views/RecommenderTable.vue")
+            },{
                 path: "/charts",
                 name: "basecharts",
                 meta: {
