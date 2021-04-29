@@ -80,7 +80,7 @@ export default {
         {
           icon: "el-icon-lx-favorfill",
           index: "recommender",
-          title: "推荐管理"
+          title: "标签管理"
         },
         {
           icon: "el-icon-lx-emoji",

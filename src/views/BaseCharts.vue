@@ -1,21 +1,6 @@
 <template>
     <div>
-        <div class="crumbs">
-            <el-breadcrumb separator="/">
-                <el-breadcrumb-item>
-                    <i class="el-icon-pie-chart"></i> schart图表
-                </el-breadcrumb-item>
-            </el-breadcrumb>
-        </div>
         <div class="container">
-            <div class="plugins-tips">
-                vue-schart：vue.js封装sChart.js的图表组件。
-                访问地址：
-                <a
-                    href="https://github.com/lin-xin/vue-schart"
-                    target="_blank"
-                >vue-schart</a>
-            </div>
             <div class="schart-box">
                 <div class="content-title">柱状图</div>
                 <schart class="schart" canvasId="bar" :options="options1"></schart>
@@ -50,12 +35,10 @@ export default {
                 title: {
                     text: '最近一周各品类销售图'
                 },
-                bgColor: '#fbfbfb',
                 labels: ['周一', '周二', '周三', '周四', '周五'],
                 datasets: [
                     {
                         label: '家电',
-                        fillColor: 'rgba(241, 49, 74, 0.5)',
                         data: [234, 278, 270, 190, 230]
                     },
                     {

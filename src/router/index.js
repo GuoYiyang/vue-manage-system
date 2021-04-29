@@ -50,7 +50,7 @@ const routes = [
                 path: "/recommender",
                 name: "recommendertable",
                 meta: {
-                    title: '推荐管理'
+                    title: '标签管理'
                 },
                 component: () => import (
                     /* webpackChunkName: "table" */
@@ -109,7 +109,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    document.title = `${to.meta.title} | vue-manage-system`;
+    document.title = `${to.meta.title}`;
     const role = localStorage.getItem('ms_username');
     if (!role && to.path !== '/login') {
         next('/login');

@@ -8,6 +8,7 @@
       </div>
       <el-table
         stripe
+        empty-text="请使用搜索框检索用户标签"
         :data="tableData"
         border
         class="table"
@@ -38,29 +39,16 @@
             <el-tag>{{scope.row.rfm}}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="180" align="center">
-          <template #default="scope">
-            <el-button
-              type="text"
-              icon="el-icon-delete"
-              class="red"
-              @click="handleDelete(scope.$index, scope.row)"
-            >删除
-            </el-button>
-          </template>
-        </el-table-column>
       </el-table>
 
-      <div class="pagination">
-        <el-pagination
-          background
-          layout="total, prev, pager, next"
-          :current-page="query.pageIndex"
-          :page-size="query.pageSize"
-          :total="pageTotal"
-          @current-change="handlePageChange"
-        ></el-pagination>
-      </div>
+      <el-card shadow="hover">
+        <div class="schart-box">
+          <schart class="schart" canvasId="querybar" :options="queryOptions"></schart>
+        </div>
+        <div class="schart-box">
+          <schart class="schart" canvasId="catbar" :options="catOptions"></schart>
+        </div>
+      </el-card>
     </div>
 
     <!-- 编辑弹出框 -->
@@ -95,10 +83,29 @@
 
 <script>
 import {getRecommenderList, deleteRecommender, addOrUpdateSlide} from "../api/index";
-
+import Schart from 'vue-schart';
 export default {
+  components: {
+    Schart
+  },
   data() {
     return {
+      queryOptions: {
+        type: 'bar',
+        title: {
+          text: '关键词检索得分详细数据'
+        },
+        labels: [],
+        datasets: []
+      },
+      catOptions: {
+        type: 'bar',
+        title: {
+          text: '推进类别得分详细数据'
+        },
+        labels: [],
+        datasets: []
+      },
       rfmOptions: [{
         value: '高价值',
         label: '高价值'
@@ -116,30 +123,28 @@ export default {
         label: '低价值'
       }],
       query: {
-        username: "",
-        pageIndex: 1,
-        pageSize: 10
+        username: ""
       },
       slideVisible: false,
       slideForm: {},
       tableData: [],
-      pageTotal: 0,
       idx: -1,
       id: -1,
     };
-  },
-  created() {
-    this.getData();
   },
   methods: {
     getData() {
       getRecommenderList(this.query).then(res => {
         if (res.code === 200) {
-          this.tableData = res.data.recommenderList
-          this.pageTotal = res.data.totalCnt || 0;
-          this.$message.success(`获取推荐数据成功`);
+          this.tableData = res.data.recDto;
+          this.queryOptions.labels = res.data.queryLabelList;
+          this.queryOptions.datasets = res.data.queryDataSetList;
+          this.catOptions.labels = res.data.catLabelList;
+          this.catOptions.datasets = res.data.catDataSetList;
+          console.log(res.data)
+          this.$message.success(`获取标签数据成功`);
         } else {
-          this.$message.error(`获取推荐数据失败`);
+          this.$message.error(`获取标签数据失败`);
         }
       })
     },
@@ -160,7 +165,6 @@ export default {
     // 触发搜索按钮
     handleSearch() {
       this.getData();
-      this.$set(this.query, "pageIndex", 1);
     },
     // 删除操作
     handleDelete(index, row) {
@@ -181,12 +185,6 @@ export default {
         })
       })
     },
-    // 分页导航
-    handlePageChange(val) {
-      this.query.pageIndex = val
-      this.getData();
-    }
-
   }
 };
 </script>
@@ -195,11 +193,9 @@ export default {
 .handle-box {
   margin-bottom: 20px;
 }
-
-.handle-select {
-  width: 120px;
+.schart {
+  height: 400px;
 }
-
 .handle-input {
   width: 300px;
   display: inline-block;
@@ -218,10 +214,4 @@ export default {
   margin-right: 10px;
 }
 
-.table-td-thumb {
-  display: block;
-  margin: auto;
-  width: 40px;
-  height: 40px;
-}
 </style>
