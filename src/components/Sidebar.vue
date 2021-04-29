@@ -86,11 +86,6 @@ export default {
           icon: "el-icon-lx-emoji",
           index: "icon",
           title: "自定义图标"
-        },
-        {
-          icon: "el-icon-pie-chart",
-          index: "charts",
-          title: "schart图表"
         }
       ]
     };

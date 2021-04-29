@@ -1,8 +1,8 @@
 import request from '../utils/request';
 
-export const fetchData = query => {
+export const checkRole = query => {
     return request({
-        url: './table.json',
+        url: '/api/admin/user/checkRole',
         method: 'get',
         params: query
     });
