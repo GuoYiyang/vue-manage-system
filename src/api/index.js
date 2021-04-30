@@ -109,6 +109,28 @@ export const addOrUpdateSlide = query => {
     });
 };
 
+export const getUserCnt = query => {
+    return request({
+        url: '/api/admin/home/getUserCnt',
+        method: 'get',
+        params: query
+    });
+};
 
+export const getOrderCnt = query => {
+    return request({
+        url: '/api/admin/home/getOrderCnt',
+        method: 'get',
+        params: query
+    });
+};
+
+export const getOrderTotal = query => {
+    return request({
+        url: '/api/admin/home/getOrderTotal',
+        method: 'get',
+        params: query
+    });
+};
 
 
